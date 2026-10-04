@@ -1,130 +1,84 @@
-# Mate Club · Proyecto final JavaScript
+Mate Club
+Simulador de tienda online de mates, termos y accesorios, desarrollado como proyecto final del curso de JavaScript.
+Autor: Alejandro Gomez
+La aplicación permite recorrer un catálogo, seleccionar productos, gestionar un carrito y confirmar una compra simulada desde la interfaz, sin registro ni inicio de sesión.
+Funcionalidades
+- Catálogo cargado desde un archivo JSON local mediante fetch.
+- Búsqueda por nombre o descripción, filtro por categoría y orden por precio.
+- Carrito con opciones para agregar productos, modificar cantidades, quitar artículos y vaciar la selección.
+- Límite de unidades por producto según la disponibilidad definida en el catálogo.
+- Persistencia de productos y cantidades con localStorage.
+- Cálculo de subtotal, envío y total en pesos argentinos.
+- Formulario con nombre y dirección obligatoria para envíos a domicilio.
+- Confirmación de compra y notificaciones mediante SweetAlert2.
+- Comprobante en pantalla con número de pedido, productos y total.
+- Mensajes de error y opción de reintento si falla la carga del catálogo.
+- Diseño adaptable a diferentes tamaños de pantalla.
+Tecnologías
+- HTML5 y CSS3.
+- JavaScript.
+- JSON y Fetch API.
+- Web Storage API (localStorage).
+- SweetAlert2, incluida localmente.
+Ejecución local
+1. Descargá o cloná el repositorio.
+2. Abrí la carpeta que contiene index.html en Visual Studio Code.
+3. Instalá la extensión Live Server, de Ritwick Dey, si todavía no la tenés.
+4. Hacé clic derecho sobre index.html y seleccioná Open with Live Server.
+5. Usá la aplicación desde la dirección local que se abre en el navegador.
+El proyecto debe ejecutarse mediante un servidor HTTP local para permitir la lectura del JSON con fetch. No se debe abrir index.html directamente mediante doble clic.
+No requiere instalar paquetes con npm, configurar claves ni compilar archivos.
+Alternativa con Python
+Si tenés Python instalado, ejecutá este comando desde la carpeta que contiene index.html:
+python -m http.server 5500
+Luego abrí http://localhost:5500 en el navegador.
+Estructura del proyecto
+Ruta	Contenido
+index.html	Estructura de la interfaz y referencias a estilos y scripts.
+assets/	Ilustraciones SVG de los productos.
+css/styles.css	Estilos y adaptación a pantallas pequeñas.
+data/productos.json	Catálogo de productos y disponibilidad por pedido.
+js/carrito.js	Gestión del carrito, persistencia y cálculo de importes.
+js/app.js	Carga de datos, manipulación del DOM y eventos de la aplicación.
+js/vendor/sweetalert2.all.min.js	Librería para notificaciones y confirmaciones.
+docs/readme.md	Documentación del proyecto.
+docs/LICENCIA-SweetAlert2.txt	Licencia de la librería externa.
 
-Autor: Alejandro Gomez. Simulador educativo de compra de mates, termos y accesorios. Precios, disponibilidad, retiro y envíos ficticios. No procesa pagos ni envía pedidos a un servidor.
 
-## 1. Abrir y probar en Windows
+El proyecto incluye dos archivos JavaScript propios y un archivo JavaScript de terceros. El catálogo se define en JSON; el carrito almacena únicamente los identificadores de los productos y sus cantidades.
+Flujo de compra
+1. Buscar o filtrar productos en el catálogo.
+2. Agregar los productos al carrito.
+3. Ajustar las cantidades o eliminar artículos.
+4. Seleccionar retiro o envío a domicilio.
+5. Completar los datos solicitados y revisar el total.
+6. Confirmar el pedido en el cuadro de SweetAlert2.
+7. Consultar el comprobante generado en pantalla.
+Cancelar la confirmación conserva el carrito. Al confirmar la compra, se vacía la selección y se elimina su información persistida.
+Reglas del simulador
+- Todos los importes se expresan en pesos argentinos (ARS).
+- El retiro no tiene costo.
+- El envío cuesta $4.500 y es gratuito desde un subtotal de $70.000.
+- La disponibilidad representa un máximo de unidades por producto y por pedido.
+- Los productos y cantidades del carrito se conservan al recargar la página.
+- El nombre, la dirección y el método de entrega no se guardan en localStorage.
+- El comprobante se muestra en la página actual y no se conserva al recargar.
+Implementación de JavaScript
+Concepto	Uso en el proyecto
+DOM y eventos	Generación de tarjetas, actualización del carrito y respuesta a acciones del usuario.
+map y filter	Creación de contenido y selección de productos según búsqueda y categoría.
+find	Búsqueda de un producto por su identificador.
+reduce	Cálculo de subtotales y cantidad de unidades.
+forEach y every	Recuperación del carrito y validación del catálogo.
+localStorage	Guardado, modificación, eliminación y vaciado de la información del carrito.
+Operador ternario y OR	Selección de valores y uso de alternativas predeterminadas.
+Destructuring	Extracción de propiedades de productos y resultados de cálculos.
+async/await	Lectura asíncrona del catálogo.
+try/catch/finally	Manejo de errores y actualización del estado de carga.
+SweetAlert2	Notificaciones y confirmaciones sin alert, prompt ni confirm nativos.
 
-1. Extraé el ZIP (clic derecho → Extraer todo).
-2. Abrí Visual Studio Code. Elegí Archivo → Abrir carpeta y seleccioná `mate-club`, donde está `index.html`.
-3. En Extensiones, buscá **Live Server**, de Ritwick Dey, e instalalo.
-4. Clic derecho sobre `index.html` → **Open with Live Server**.
-5. Se abrirá una dirección similar a `http://127.0.0.1:5500`. Usá esa ventana.
-6. No abras el HTML con doble clic: `fetch` necesita un servidor HTTP para leer el JSON correctamente.
 
-Alternativa si tenés Python: abrí una terminal dentro de `mate-club`, ejecutá `python -m http.server 5500` y visitá `http://localhost:5500`. No se necesita npm, claves, compilación ni backend. SweetAlert2 se incluye localmente.
-
-## 2. Probar el circuito
-
-1. Buscá “mate”, probá categorías y orden por precio.
-2. Agregá Mate Oliva y aumentá a 2 unidades: subtotal $37.000.
-3. Elegí envío: total $41.500 (incluye $4.500).
-4. Recargá: los productos y cantidades siguen. Nombre, dirección y entrega se reinician; no se guardan datos personales.
-5. Cambiá a retiro: envío sin cargo.
-6. Probá restar, quitar un producto y vaciar (con opción de cancelar).
-7. Agregá 2 Termos Bosque y elegí envío: $84.000, envío gratis.
-8. Completá nombre y dirección. Confirmá compra; primero probá cancelar.
-9. Confirmá nuevamente y aceptá: aparece el número y resumen de pedido y se vacía el carrito.
-10. Recargá: el carrito permanece vacío. El comprobante solo permanece durante la sesión de página actual.
-11. Probá alcanzar el máximo de un producto: los botones de sumar/agregar se deshabilitan.
-12. Para probar un fallo de carga, renombrá temporalmente `data/productos.json`, recargá, comprobá el error, restaurá el nombre y pulsá Reintentar carga.
-13. Revisá la vista móvil con las herramientas del navegador y comprobá que no haya errores rojos en Console.
-
-## 3. Subir a GitHub y entregar
-
-1. Iniciá sesión en https://github.com y creá un repositorio con **New repository**.
-2. Nombre sugerido: `proyecto-final-javascript-gomez`. Elegí **Public**.
-3. No agregues README, licencia ni .gitignore automáticos: la consigna exige que el único archivo suelto en raíz sea index.html. La documentación ya está en `docs/`.
-4. Creá el repositorio y elegí **uploading an existing file** (o Add file → Upload files).
-5. Arrastrá el CONTENIDO de `mate-club`: `index.html` y las carpetas `assets`, `css`, `js`, `data`, `docs`. No subas el ZIP ni la carpeta exterior completa.
-6. Confirmá con **Commit changes**. Verificá que index.html aparece directamente en la raíz.
-7. Opcional y recomendado: Settings → Pages → Build and deployment → Source: Deploy from a branch → Branch: main → carpeta /(root) → Save.
-8. Esperá a que GitHub muestre la URL publicada. Abrila y repetí una compra; verificá también `URL-DEL-SITIO/data/productos.json`.
-9. Entregá la URL del REPOSITORIO público. Podés añadir la URL de Pages como demo, pero no reemplaza al repositorio.
-10. Abrí el repositorio en una ventana privada para comprobar que se ve sin iniciar sesión.
-
-No se creó ni publicó un repositorio desde este entregable; esos pasos deben realizarse con tu cuenta.
-
-## 4. Organización
-
-- `index.html`: estructura de la interfaz y referencias a los tres scripts, en orden y con defer.
-- `assets/`: seis ilustraciones SVG originales, locales.
-- `css/styles.css`: diseño responsive propio.
-- `data/productos.json`: catálogo completo; único array de objetos inicial de la aplicación.
-- `js/carrito.js`: reglas del carrito, cálculos y persistencia.
-- `js/app.js`: fetch, validación, DOM, filtros, eventos y confirmación.
-- `js/vendor/sweetalert2.all.min.js`: librería de terceros SweetAlert2 11.26.25, sin modificar.
-- `docs/`: esta guía y licencia de la librería.
-
-Hay exactamente tres archivos .js, incluidos los de terceros. Los scripts propios son dos. No hay arrays de productos escritos manualmente en JavaScript: se cargan desde JSON. Los resultados de filter/map se derivan de esa fuente. El carrito es un objeto de cantidades por ID, no un segundo catálogo duplicado. No se usa login.
-
-## 5. Cómo entender y explicar el código
-
-### Paso A: los datos
-
-Abrí productos.json. Cada objeto describe id, nombre, categoría, precio, stock, descripción e imagen. Para cambiar productos editás este archivo. Usá comillas dobles, sin comentarios ni comas finales. Los IDs son únicos y contienen minúsculas, números y guiones. Las imágenes deben seguir el formato assets/nombre.svg. El stock representa el máximo por pedido; no es inventario real compartido entre compradores.
-
-### Paso B: carga asíncrona
-
-En app.js, cargarProductos() hace fetch del JSON dentro de try. await espera la respuesta y luego su conversión con respuesta.json(). Se verifica respuesta.ok y se valida el contenido. catch muestra un error y un botón para reintentar. finally quita el estado de carga, tanto si hubo éxito como error.
-
-### Paso C: DOM y eventos
-
-renderizarProductos() genera tarjetas a partir de los datos. Los eventos input y change actualizan filtros. Los eventos click de los contenedores usan closest y dataset para identificar el botón: es delegación de eventos, útil porque las tarjetas se vuelven a crear. renderizarCarrito() actualiza las líneas, cantidades, totales y botones. Los textos variables se escapan antes de insertarlos con innerHTML; el comprobante usa textContent.
-
-### Paso D: funciones de orden superior
-
-- map transforma productos en tarjetas HTML y genera categorías.
-- filter selecciona productos por búsqueda/categoría y los que están en el carrito.
-- find localiza un producto por ID al cambiar cantidades.
-- reduce calcula subtotal y cantidad total.
-- forEach recupera cantidades válidas del almacenamiento.
-- every valida los registros del JSON.
-
-Una función de orden superior recibe otra función. Por ejemplo, reduce recibe una función que acumula precio × cantidad.
-
-### Paso E: storage y operadores
-
-En carrito.js, carrito empieza como objeto vacío. Al agregar un producto se guarda una propiedad como `"mate-oliva": 2`. JSON.stringify convierte el objeto a texto; setItem lo guarda. JSON.parse y getItem lo recuperan. Cambiar cantidades modifica la información persistida; eliminarProducto borra una propiedad y vuelve a guardar. vaciarCarrito usa removeItem mediante guardarCarrito. Se elimina solo la clave propia, sin borrar información ajena del mismo origen.
-
-`carrito[id] || 0` usa OR como valor alternativo. `cantidad > 0 ? valorA : valorB` ejemplifica un ternario; en el código se aplica al costo de envío, orden y mensajes. `const { subtotal, envio, total, cantidad } = ...` es destructuring: extrae propiedades del objeto devuelto por calcularTotales.
-
-Si el navegador bloquea localStorage, la interfaz lo informa y el carrito funciona en memoria. Si encuentra datos dañados, inicia un carrito nuevo. Al recargar se valida cada ID y se limita la cantidad al stock del catálogo.
-
-### Paso F: confirmación
-
-El formulario valida nombre y dirección para envío. SweetAlert2 pide confirmación. Cancelar conserva el carrito; aceptar genera un número de pedido, muestra un resumen y limpia el carrito. procesandoCompra evita confirmaciones duplicadas mientras se completa el flujo. No hay pago real ni reserva en una base de datos remota.
-
-## 6. Checklist de la consigna
-
-| Requisito | Implementación |
-|---|---|
-| Único archivo en raíz | index.html; documentación en docs/readme.md |
-| Recursos multimedia | assets con imágenes SVG |
-| Entre 2 y 3 JS | 2 propios + 1 librería local |
-| JSON mediante fetch | data/productos.json, cargarProductos |
-| DOM y eventos | renderizarProductos, renderizarCarrito, addEventListener |
-| Dos funciones de orden superior | map, filter, reduce, find, forEach, every |
-| Guardar/modificar/borrar/vaciar storage | guardarCarrito, cambiarCantidad, eliminarProducto, vaciarCarrito |
-| Ternario, OR, destructuring | carrito.js y app.js |
-| async/await, try/catch/finally | cargarProductos |
-| Error de carga y reintento | estado y botón reintentar |
-| Librería JS externa | SweetAlert2 local, con licencia |
-| Circuito completo | catálogo → selección → carrito → cantidades → total → confirmación → comprobante |
-| Sin cuadros nativos | diálogos SweetAlert2 y validación del formulario |
-| Nombres semánticos | productos, carrito, calcularTotales, cargarProductos |
-
-## 7. Fuentes y licencia de terceros
-
-SweetAlert2: https://sweetalert2.github.io/ — https://github.com/sweetalert2/sweetalert2
-Distribución: https://cdn.jsdelivr.net/npm/sweetalert2@11.26.25/dist/sweetalert2.all.min.js
-Licencia MIT incluida en LICENCIA-SweetAlert2.txt. El archivo minificado es código de terceros; la explicación y los criterios de claridad se aplican a los scripts propios.
-GitHub: https://docs.github.com/en/repositories/working-with-files/managing-files/adding-a-file-to-a-repository
-GitHub Pages: https://docs.github.com/en/pages/getting-started-with-github-pages/configuring-a-publishing-source-for-your-github-pages-site
-
-Antes de entregar, recorré la guía y practicá explicar el flujo con tus palabras. Personalizá los datos o estilos que quieras, sin romper las rutas ni agregar scripts innecesarios.
-
-## 8. Verificación realizada
-
-Se verificaron sintaxis de ambos scripts, estructura, rutas y recursos. Pruebas automatizadas de lógica: cálculos, envío gratis, persistencia, cantidades, límites, eliminación, vaciado y recuperación ante datos dañados. Pruebas con DOM simulado: catálogo, búsqueda sin resultados, cancelación, confirmación, comprobante y errores/reintentos de fetch.
-
-No se completó la prueba visual en navegador real en el entorno de preparación porque no se pudo instalar el navegador de pruebas. Antes de entregar, realizá el recorrido manual de la sección 2 en tu navegador, tanto en escritorio como en vista móvil.
+Alcance
+Proyecto educativo: las compras, los precios y los envíos son simulados. No procesa pagos, no envía pedidos a un servidor y no administra inventario compartido entre usuarios.
+Librería de terceros
+SweetAlert2 se distribuye bajo licencia MIT. La licencia correspondiente se incluye en [LICENCIA-SweetAlert2.txt](LICENCIA-SweetAlert2.txt).
