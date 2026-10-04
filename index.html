@@ -1,0 +1,245 @@
+<!DOCTYPE html>
+<html lang="es-AR">
+  <head>
+    <meta charset="UTF-8">
+
+    <meta
+      name="viewport"
+      content="width=device-width, initial-scale=1"
+    >
+
+    <meta
+      name="description"
+      content="Mate Club: simulador de compra de mates, termos y accesorios."
+    >
+
+    <title>Mate Club | Tu próximo ritual</title>
+
+    <!-- Estilos -->
+    <link rel="stylesheet" href="css/styles.css">
+
+    <!-- Librería externa y scripts de la aplicación -->
+    <script defer src="js/vendor/sweetalert2.all.min.js"></script>
+    <script defer src="js/carrito.js"></script>
+    <script defer src="js/app.js"></script>
+  </head>
+
+  <body>
+    <!-- Encabezado -->
+    <header>
+      <a class="brand" href="#">
+        mate club
+        <span>OBJETOS PARA TU RITUAL</span>
+      </a>
+
+      <a class="bag" href="#carrito">
+        Tu carrito
+        <span id="cantidad">0</span>
+      </a>
+    </header>
+
+    <main>
+      <!-- Presentación -->
+      <section class="hero">
+        <div>
+          <p class="eyebrow">PAUSA. CEBÁ. DISFRUTÁ.</p>
+
+          <h1>
+            Lo bueno se<br>
+            comparte.
+          </h1>
+
+          <p>
+            Mates, termos y pequeños objetos<br>
+            para acompañar tus grandes momentos.
+          </p>
+
+          <a class="button" href="#tienda">
+            Encontrá tu próximo mate ↗
+          </a>
+        </div>
+
+        <img
+          src="assets/mate-oliva.svg"
+          alt="Mate de cerámica verde oliva"
+        >
+
+        <span class="hero-note">
+          Un ritual de todos los días.
+        </span>
+      </section>
+
+      <!-- Beneficios -->
+      <div class="strip">
+        <span>Envío gratis desde $ 70.000</span>
+        <span>Retiro sin cargo</span>
+        <span>Precios en pesos argentinos</span>
+      </div>
+
+      <!-- Tienda -->
+      <section class="shop" id="tienda">
+        <!-- Catálogo -->
+        <div class="catalog">
+          <p class="eyebrow">HECHOS PARA ACOMPAÑARTE</p>
+
+          <h2>Elegí tu compañero.</h2>
+
+          <!-- Búsqueda, categorías y orden -->
+          <div class="filters">
+            <label>
+              Buscar
+              <input
+                id="busqueda"
+                type="search"
+                placeholder="Mate, termo, bombilla…"
+              >
+            </label>
+
+            <label>
+              Categoría
+              <select id="categoria">
+                <option value="">Todo el catálogo</option>
+              </select>
+            </label>
+
+            <label>
+              Ordenar
+              <select id="orden">
+                <option value="destacados">Destacados</option>
+                <option value="menor">Menor precio</option>
+                <option value="mayor">Mayor precio</option>
+              </select>
+            </label>
+          </div>
+
+          <!-- Estado de carga -->
+          <p id="estado" role="status">
+            Cargando catálogo…
+          </p>
+
+          <button id="reintentar" hidden>
+            Reintentar carga
+          </button>
+
+          <!-- Productos generados con JavaScript -->
+          <div
+            id="productos"
+            class="products"
+            aria-busy="true"
+          ></div>
+        </div>
+
+        <!-- Carrito -->
+        <aside id="carrito">
+          <p class="eyebrow">TU SELECCIÓN</p>
+
+          <h2>El próximo ritual</h2>
+
+          <!-- Productos seleccionados -->
+          <div id="items"></div>
+
+          <button
+            id="vaciar"
+            class="text-button"
+            disabled
+          >
+            Vaciar carrito
+          </button>
+
+          <!-- Formulario de compra -->
+          <form id="compra">
+            <label>
+              Entrega
+              <select id="entrega">
+                <option value="retiro">Retiro sin cargo</option>
+                <option value="envio">Envío a domicilio</option>
+              </select>
+            </label>
+
+            <p class="hint">
+              Envío: $ 4.500. Gratis desde $ 70.000.
+            </p>
+
+            <!-- Resumen de importes -->
+            <div class="totals">
+              <p>
+                Subtotal
+                <strong id="subtotal"></strong>
+              </p>
+
+              <p>
+                Envío
+                <strong id="costo-envio"></strong>
+              </p>
+
+              <p class="total">
+                Total
+                <strong id="total"></strong>
+              </p>
+            </div>
+
+            <!-- Datos del comprador -->
+            <label>
+              Tu nombre
+              <input
+                id="nombre"
+                required
+                minlength="2"
+                maxlength="60"
+                autocomplete="given-name"
+                placeholder="¿Quién recibe?"
+              >
+            </label>
+
+            <label id="direccion-grupo" hidden>
+              Dirección de entrega
+              <input
+                id="direccion"
+                minlength="5"
+                maxlength="150"
+                autocomplete="street-address"
+                placeholder="Calle, número y localidad"
+              >
+            </label>
+
+            <button
+              id="confirmar"
+              class="button full"
+              type="submit"
+              disabled
+            >
+              Confirmar compra →
+            </button>
+
+            <p class="hint">
+              Compra simulada. No se realizan pagos ni envíos.
+            </p>
+          </form>
+
+          <!-- Avisos de almacenamiento -->
+          <p id="aviso-storage" role="status"></p>
+
+          <!-- Comprobante de compra -->
+          <section
+            id="comprobante"
+            hidden
+            aria-live="polite"
+          >
+            <h3>¡Pedido confirmado!</h3>
+
+            <p id="detalle-pedido"></p>
+          </section>
+        </aside>
+      </section>
+    </main>
+
+    <!-- Pie de página -->
+    <footer>
+      <strong>mate club</strong>
+
+      <span>
+        Proyecto final JavaScript · Alejandro Gomez
+      </span>
+    </footer>
+  </body>
+</html>

@@ -1,0 +1,56 @@
+[
+  {
+    "id": "mate-oliva",
+    "nombre": "Mate Oliva",
+    "categoria": "Mates",
+    "precio": 18500,
+    "stock": 8,
+    "descripcion": "Cerámica esmaltada · 250 ml",
+    "imagen": "assets/mate-oliva.svg"
+  },
+  {
+    "id": "mate-arena",
+    "nombre": "Mate Arena",
+    "categoria": "Mates",
+    "precio": 18500,
+    "stock": 6,
+    "descripcion": "Cerámica esmaltada · 250 ml",
+    "imagen": "assets/mate-arena.svg"
+  },
+  {
+    "id": "termo-bosque",
+    "nombre": "Termo Bosque",
+    "categoria": "Termos",
+    "precio": 42000,
+    "stock": 5,
+    "descripcion": "Acero inoxidable · 1 litro",
+    "imagen": "assets/termo-bosque.svg"
+  },
+  {
+    "id": "termo-crema",
+    "nombre": "Termo Crema",
+    "categoria": "Termos",
+    "precio": 42000,
+    "stock": 4,
+    "descripcion": "Acero inoxidable · 1 litro",
+    "imagen": "assets/termo-crema.svg"
+  },
+  {
+    "id": "bombilla",
+    "nombre": "Bombilla Clásica",
+    "categoria": "Accesorios",
+    "precio": 9500,
+    "stock": 12,
+    "descripcion": "Acero inoxidable · filtro cuchara",
+    "imagen": "assets/bombilla.svg"
+  },
+  {
+    "id": "yerbera",
+    "nombre": "Yerbera Terracota",
+    "categoria": "Accesorios",
+    "precio": 14000,
+    "stock": 7,
+    "descripcion": "Lata hermética · 500 gramos",
+    "imagen": "assets/yerbera.svg"
+  }
+]

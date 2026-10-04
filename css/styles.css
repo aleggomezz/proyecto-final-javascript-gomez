@@ -1,0 +1,478 @@
+/* ========================================
+   1. ESTILOS GENERALES
+   ======================================== */
+
+* {
+  box-sizing: border-box;
+}
+
+html {
+  scroll-behavior: smooth;
+}
+
+body {
+  margin: 0;
+  background: #faf9f5;
+  color: #263d30;
+  font-family: Arial, sans-serif;
+}
+
+header,
+main,
+footer {
+  max-width: 1380px;
+  margin: auto;
+}
+
+a {
+  color: inherit;
+  text-decoration: none;
+}
+
+/* ========================================
+   2. ENCABEZADO
+   ======================================== */
+
+header {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  padding: 28px 5%;
+}
+
+.brand {
+  font-size: 32px;
+  font-weight: 800;
+  letter-spacing: -2px;
+}
+
+.brand span {
+  display: block;
+  font-size: 9px;
+  letter-spacing: 2px;
+  margin-top: 6px;
+}
+
+.bag {
+  font-size: 14px;
+}
+
+.bag span {
+  display: inline-grid;
+  place-items: center;
+  border-radius: 50%;
+  background: #263d30;
+  color: white;
+  width: 28px;
+  height: 28px;
+  margin-left: 8px;
+}
+
+/* ========================================
+   3. PRESENTACIÓN
+   ======================================== */
+
+.hero {
+  position: relative;
+  background: #e5e8d8;
+  margin: 0 3%;
+  padding: 55px 6%;
+  border-radius: 8px;
+  display: grid;
+  grid-template-columns: 1fr 1fr;
+  align-items: center;
+  overflow: hidden;
+}
+
+.eyebrow {
+  font-size: 10px;
+  letter-spacing: 2px;
+  font-weight: 700;
+}
+
+h1 {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  letter-spacing: -3px;
+  font-size: clamp(48px, 6vw, 82px);
+  line-height: 1.03;
+  margin: 22px 0;
+}
+
+.hero p:not(.eyebrow) {
+  line-height: 1.7;
+  color: #50614c;
+}
+
+.hero img {
+  width: 100%;
+  max-height: 330px;
+  mix-blend-mode: multiply;
+}
+
+.hero-note {
+  position: absolute;
+  right: 6%;
+  bottom: 25px;
+  font-family: Georgia, serif;
+  font-style: italic;
+}
+
+/* ========================================
+   4. BOTONES
+   ======================================== */
+
+.button,
+button {
+  cursor: pointer;
+  font: inherit;
+  border: 0;
+  border-radius: 5px;
+  padding: 12px 16px;
+  background: #263d30;
+  color: #fff;
+}
+
+.button {
+  display: inline-block;
+  font-size: 14px;
+  padding: 16px 21px;
+}
+
+.hero .button {
+  margin-top: 14px;
+}
+
+button:hover,
+.button:hover {
+  background: #456047;
+}
+
+button:disabled {
+  opacity: 0.45;
+  cursor: not-allowed;
+}
+
+/* ========================================
+   5. FRANJA DE BENEFICIOS
+   ======================================== */
+
+.strip {
+  display: flex;
+  justify-content: space-around;
+  padding: 24px 4%;
+  font-size: 12px;
+  border-bottom: 1px solid #dfdfd5;
+  margin: 0 3%;
+}
+
+/* ========================================
+   6. TIENDA Y FILTROS
+   ======================================== */
+
+.shop {
+  display: grid;
+  grid-template-columns: minmax(0, 1fr) 330px;
+  gap: 38px;
+  padding: 55px 5%;
+}
+
+h2 {
+  font-family: Georgia, serif;
+  font-weight: 400;
+  font-size: 30px;
+  margin: 10px 0 24px;
+}
+
+.filters {
+  display: grid;
+  grid-template-columns: 1.3fr 1fr 1fr;
+  gap: 10px;
+}
+
+label {
+  display: block;
+  font-size: 12px;
+  font-weight: 600;
+}
+
+input,
+select {
+  display: block;
+  width: 100%;
+  padding: 12px;
+  border: 1px solid #d5d8ca;
+  background: #fff;
+  border-radius: 4px;
+  margin-top: 7px;
+  color: #263d30;
+  font: inherit;
+}
+
+#estado {
+  font-size: 12px;
+  color: #65725e;
+  min-height: 16px;
+}
+
+/* ========================================
+   7. TARJETAS DE PRODUCTOS
+   ======================================== */
+
+.products {
+  display: grid;
+  grid-template-columns: repeat(3, minmax(0, 1fr));
+  gap: 22px 16px;
+}
+
+.product img {
+  width: 100%;
+  border-radius: 5px;
+}
+
+.product h3 {
+  font-size: 15px;
+  margin: 12px 0 7px;
+}
+
+.product p {
+  font-size: 11px;
+  color: #62705b;
+  line-height: 1.5;
+}
+
+.product .price {
+  font-size: 16px;
+  color: #263d30;
+  font-weight: bold;
+}
+
+.product button {
+  width: 100%;
+  background: transparent;
+  color: #263d30;
+  border: 1px solid #b8c0ae;
+  padding: 10px;
+  font-size: 12px;
+}
+
+.product button:hover {
+  background: #e5e8d8;
+}
+
+/* ========================================
+   8. CARRITO
+   ======================================== */
+
+aside {
+  align-self: start;
+  background: #f0f1e9;
+  border: 1px solid #dfe2d5;
+  border-radius: 7px;
+  padding: 24px;
+  scroll-margin-top: 20px;
+}
+
+aside h2 {
+  font-size: 26px;
+}
+
+.cart-item {
+  border-bottom: 1px solid #d6dacb;
+  padding: 12px 0;
+}
+
+.cart-item p {
+  margin: 0 0 10px;
+  font-size: 13px;
+}
+
+.cart-actions {
+  display: flex;
+  align-items: center;
+  gap: 12px;
+}
+
+.cart-actions button {
+  padding: 4px 9px;
+}
+
+.cart-actions .remove {
+  margin-left: auto;
+  background: none;
+  color: #53604d;
+  text-decoration: underline;
+  font-size: 11px;
+}
+
+.text-button {
+  background: none;
+  color: #52654d;
+  text-decoration: underline;
+  font-size: 12px;
+  padding: 15px 0;
+}
+
+.text-button:hover {
+  background: none;
+}
+
+/* ========================================
+   9. FORMULARIO Y TOTALES
+   ======================================== */
+
+.hint {
+  font-size: 11px;
+  color: #65725e;
+  line-height: 1.5;
+}
+
+.totals {
+  border-top: 1px solid #d6dacb;
+  margin-top: 20px;
+  padding-top: 8px;
+}
+
+.totals p {
+  display: flex;
+  justify-content: space-between;
+  font-size: 13px;
+}
+
+.totals .total {
+  font-size: 20px;
+  border-top: 1px solid #d6dacb;
+  padding-top: 16px;
+}
+
+form label {
+  margin: 15px 0;
+}
+
+.full {
+  width: 100%;
+  margin-top: 10px;
+}
+
+/* ========================================
+   10. COMPROBANTE Y AVISOS
+   ======================================== */
+
+#comprobante {
+  margin-top: 20px;
+  border-top: 1px solid #a3b296;
+  font-size: 13px;
+  line-height: 1.6;
+}
+
+#aviso-storage {
+  font-size: 12px;
+  color: #8a412e;
+}
+
+/* ========================================
+   11. PIE DE PÁGINA
+   ======================================== */
+
+footer {
+  border-top: 1px solid #ddd;
+  padding: 25px 5%;
+  display: flex;
+  justify-content: space-between;
+  font-size: 12px;
+  gap: 20px;
+}
+
+footer strong {
+  font-size: 20px;
+}
+
+/* ========================================
+   12. ACCESIBILIDAD Y VISIBILIDAD
+   ======================================== */
+
+button:focus-visible,
+a:focus-visible,
+input:focus-visible,
+select:focus-visible {
+  outline: 3px solid #b36a35;
+  outline-offset: 3px;
+}
+
+[hidden] {
+  display: none !important;
+}
+
+/* ========================================
+   13. PANTALLAS DE HASTA 1100 PX
+   ======================================== */
+
+@media (max-width: 1100px) {
+  .products {
+    grid-template-columns: repeat(2, minmax(0, 1fr));
+  }
+
+  .shop {
+    gap: 24px;
+    grid-template-columns: minmax(0, 1fr) 300px;
+  }
+}
+
+/* ========================================
+   14. PANTALLAS DE HASTA 750 PX
+   ======================================== */
+
+@media (max-width: 750px) {
+  .shop {
+    grid-template-columns: 1fr;
+    padding: 30px 5%;
+  }
+
+  .hero {
+    padding: 32px 7%;
+    grid-template-columns: 1fr 0.7fr;
+  }
+
+  .hero img {
+    width: 150%;
+    margin-left: -15%;
+  }
+
+  .hero-note {
+    display: none;
+  }
+
+  .hero .button {
+    font-size: 12px;
+    padding: 12px;
+  }
+
+  .strip {
+    gap: 15px;
+    font-size: 10px;
+  }
+
+  .filters {
+    grid-template-columns: 1fr 1fr;
+  }
+
+  .filters label:first-child {
+    grid-column: 1 / -1;
+  }
+
+  footer {
+    flex-wrap: wrap;
+  }
+
+  h1 {
+    font-size: 49px;
+  }
+
+  .hero p:not(.eyebrow) {
+    font-size: 13px;
+  }
+
+  .eyebrow {
+    font-size: 9px;
+  }
+}
